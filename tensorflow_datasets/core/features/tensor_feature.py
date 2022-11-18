@@ -105,7 +105,7 @@ class Tensor(feature_lib.FeatureConnector):
     self._encoded_to_bytes = self._encoding != Encoding.NONE
     self._dynamic_shape = self._shape.count(None) > 1
 
-    if tf_utils.is_string(self._dtype) and self._encoded_to_bytes:
+    if dtype_utils.is_string(self._dtype) and self._encoded_to_bytes:
       raise NotImplementedError(
           'tfds.features.Tensor() does not support `encoding=` when '
           'dtype is string. Please open a PR if you need this feature.')
