@@ -74,8 +74,25 @@ class BBoxFeature(tensor_feature.Tensor):
   ):
     super(BBoxFeature, self).__init__(shape=(4,), dtype=np.float32, doc=doc)
 
-  def encode_example(self, bbox):
+  def encode_example(self, bbox: Union[BBox, np.ndarray]):
     """See base class for details."""
+
+    if isinstance(bbox, np.ndarray):
+      if len(bbox.shape) == 2:
+        if bbox.shape != (1, 4):
+          raise ValueError(
+              '2D array representing BBox should have shape=(1, 4). '
+              f'Instead it has {bbox.shape}.')
+        bbox = bbox[0]
+      elif len(bbox.shape) != 1:
+        raise ValueError('array representing BBox can be 1D or 2D. '
+                         f'Instead it is {len(bbox.shape)}.')
+      if bbox.shape != (4,):
+        raise ValueError(
+            'array representing BBox should have exactly 4 floats. '
+            f'Instead, it has {bbox.shape}.')
+      bbox = BBox(ymin=bbox[0], xmin=bbox[1], ymax=bbox[2], xmax=bbox[3])
+
     # Validate the coordinates
     for coordinate in bbox:
       if not isinstance(coordinate, float):
