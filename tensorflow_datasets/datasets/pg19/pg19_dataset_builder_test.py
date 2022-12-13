@@ -15,26 +15,13 @@
 
 """Test for PG-19 dataset module."""
 
-import os
-
+from tensorflow_datasets.datasets.pg19 import pg19_dataset_builder
 import tensorflow_datasets.public_api as tfds
-from tensorflow_datasets.text import pg19
 
 
 class Pg19Test(tfds.testing.DatasetBuilderTestCase):
 
-  @classmethod
-  def setUpClass(cls):
-    super(Pg19Test, cls).setUpClass()
-    pg19._DATA_DIR = os.path.join(
-        os.path.normpath(os.path.dirname(__file__) + "/../"),
-        "testing",
-        "test_data",
-        "fake_examples",
-        "pg19",
-    )
-
-  DATASET_CLASS = pg19.Pg19
+  DATASET_CLASS = pg19_dataset_builder.Builder
   SPLITS = {
       "train": 3,  # Number of fake train example
       "test": 1,  # Number of fake test example
