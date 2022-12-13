@@ -13,26 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for PetFinder."""
+"""Tests for PIQA dataset module."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import pet_finder
+from tensorflow_datasets.datasets.piqa import piqa_dataset_builder
 
 
-class PetFinderTest(testing.DatasetBuilderTestCase):
-  # petfinder:
-  DATASET_CLASS = pet_finder.PetFinder
+class PiqaTest(testing.DatasetBuilderTestCase):
+
+  DATASET_CLASS = piqa_dataset_builder.Builder
+
   SPLITS = {
-      'train': 2,  # Number of fake train example
-      'test': 2,  # Number of fake test example
-  }
-  DL_EXTRACT_RESULT = {
-      'train': 'train.csv',
-      'train_images': 'train_images',
-      'test': 'test.csv',
-      'test_images': 'test_images',
+      "train": 2,  # Number of fake train example.
+      "validation": 2  # Number of fake validation example.
   }
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   testing.test_main()

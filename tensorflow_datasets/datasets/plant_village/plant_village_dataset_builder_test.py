@@ -13,20 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for PIQA dataset module."""
+"""Test for PlantVillage dataset."""
 
 from tensorflow_datasets import testing
-from tensorflow_datasets.text import piqa
+from tensorflow_datasets.datasets.plant_village import plant_village_dataset_builder
 
 
-class PiqaTest(testing.DatasetBuilderTestCase):
-
-  DATASET_CLASS = piqa.PIQA
-
-  SPLITS = {
-      "train": 2,  # Number of fake train example.
-      "validation": 2  # Number of fake validation example.
-  }
+class PlantVillageTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = plant_village_dataset_builder.Builder
+  SPLITS = {"train": 38}
 
 
 if __name__ == "__main__":
