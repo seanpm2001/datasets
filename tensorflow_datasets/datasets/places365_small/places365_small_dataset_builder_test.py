@@ -13,21 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Test for the PlantLeaves dataset."""
-
-from tensorflow_datasets import testing
-from tensorflow_datasets.image_classification import plant_leaves
+from tensorflow_datasets.datasets.places365_small import places365_small_dataset_builder
+import tensorflow_datasets.testing as tfds_test
 
 
-class PlantLeavesTest(testing.DatasetBuilderTestCase):
-  DATASET_CLASS = plant_leaves.PlantLeaves
-  SPLITS = {"train": 22}
-  # NOTE: Must match file names in the test directory.
-  DL_EXTRACT_RESULT = {
-      fname: fname for fname in
-      ["{0:04d}_1.JPG".format(label_number) for label_number in range(1, 23)]
+class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
+  DATASET_CLASS = places365_small_dataset_builder.Builder
+  SPLITS = {'train': 2, 'test': 2, 'validation': 2}
+
+  DL_DOWNLOAD_RESULT = {
+      'train': 'data_256.tar',
+      'test': 'test_256.tar',
+      'validation': 'val_256.tar',
   }
+  DL_EXTRACT_RESULT = 'annotation'
 
 
-if __name__ == "__main__":
-  testing.test_main()
+if __name__ == '__main__':
+  tfds_test.test_main()

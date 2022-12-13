@@ -21,7 +21,7 @@ from tensorflow_datasets.structured.proteinnet.proteinnet import ProteinNet
 
 class ProteinNetTest(tfds.testing.DatasetBuilderTestCase):
   """Tests for ProteinNet dataset."""
-  DATASET_CLASS = ProteinNet
+  DATASET_CLASS = protein_net_dataset_builder.Builder
   SPLITS = {  # Number of fake examples.
       'train_100': 3,
       'test': 4,
