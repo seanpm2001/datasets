@@ -13,21 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import places365_small
-import tensorflow_datasets.testing as tfds_test
+"""Test for PetFinder."""
+
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.pet_finder import pet_finder_dataset_builder
 
 
-class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = places365_small.Places365Small
-  SPLITS = {'train': 2, 'test': 2, 'validation': 2}
-
-  DL_DOWNLOAD_RESULT = {
-      'train': 'data_256.tar',
-      'test': 'test_256.tar',
-      'validation': 'val_256.tar',
+class PetFinderTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = pet_finder_dataset_builder.Builder
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+      'test': 2,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = 'annotation'
+  DL_EXTRACT_RESULT = {
+      'train': 'train.csv',
+      'train_images': 'train_images',
+      'test': 'test.csv',
+      'test_images': 'test_images',
+  }
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  testing.test_main()
