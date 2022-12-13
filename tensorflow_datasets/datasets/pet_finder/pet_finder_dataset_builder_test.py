@@ -13,22 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""placesfull dataset."""
+"""Test for PetFinder."""
 
-from tensorflow_datasets.image_classification.placesfull import placesfull
-import tensorflow_datasets.public_api as tfds
+from tensorflow_datasets import testing
+from tensorflow_datasets.datasets.pet_finder import pet_finder_dataset_builder
 
 
-class PlacesfullTest(tfds.testing.DatasetBuilderTestCase):
-  """Tests for placesfull dataset."""
-  DATASET_CLASS = placesfull.Placesfull
-  SPLITS = {'train': 3}
-
-  DL_DOWNLOAD_RESULT = {
-      'train': 'Images256.tar',
+class PetFinderTest(testing.DatasetBuilderTestCase):
+  DATASET_CLASS = pet_finder_dataset_builder.Builder
+  SPLITS = {
+      'train': 2,  # Number of fake train example
+      'test': 2,  # Number of fake test example
   }
-  DL_EXTRACT_RESULT = 'filelist_placesfull'
+  DL_EXTRACT_RESULT = {
+      'train': 'train.csv',
+      'train_images': 'train_images',
+      'test': 'test.csv',
+      'test_images': 'test_images',
+  }
 
 
 if __name__ == '__main__':
-  tfds.testing.test_main()
+  testing.test_main()

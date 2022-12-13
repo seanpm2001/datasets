@@ -13,21 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from tensorflow_datasets.image_classification import places365_small
-import tensorflow_datasets.testing as tfds_test
+"""placesfull dataset."""
+
+from tensorflow_datasets.datasets.placesfull import placesfull_dataset_builder
+import tensorflow_datasets.public_api as tfds
 
 
-class Places365SmallTest(tfds_test.DatasetBuilderTestCase):
-  DATASET_CLASS = places365_small.Places365Small
-  SPLITS = {'train': 2, 'test': 2, 'validation': 2}
+class PlacesfullTest(tfds.testing.DatasetBuilderTestCase):
+  """Tests for placesfull dataset."""
+  DATASET_CLASS = placesfull_dataset_builder.Builder
+  SPLITS = {'train': 3}
 
   DL_DOWNLOAD_RESULT = {
-      'train': 'data_256.tar',
-      'test': 'test_256.tar',
-      'validation': 'val_256.tar',
+      'train': 'Images256.tar',
   }
-  DL_EXTRACT_RESULT = 'annotation'
+  DL_EXTRACT_RESULT = 'filelist_placesfull'
 
 
 if __name__ == '__main__':
-  tfds_test.test_main()
+  tfds.testing.test_main()
